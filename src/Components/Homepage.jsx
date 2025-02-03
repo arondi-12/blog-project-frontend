@@ -82,19 +82,19 @@ const HomePage = () => {
       id: 2,
       title: "Understanding React Basics",
       content: "A comprehensive guide to getting started with React. Discover the fundamental concepts and best practices in React development.",
-      image: "https://cdn.pixabay.com/photo/2015/09/04/23/28/wordpress-923188_1280.jpg"
+      image: "https://cdn.pixabay.com/photo/2015/05/11/14/44/pencils-762555_1280.jpg"
     },
     {
       id: 3,
       title: "Understanding React Basics",
       content: "A comprehensive guide to getting started with React. Discover the fundamental concepts and best practices in React development.",
-      image: "https://cdn.pixabay.com/photo/2015/09/04/23/28/wordpress-923188_1280.jpg"
+      image: "https://cdn.pixabay.com/photo/2014/05/05/22/17/macbook-pro-338619_1280.jpg"
     },
     {
       id: 4,
       title: "Understanding React Basics",
       content: "A comprehensive guide to getting started with React. Discover the fundamental concepts and best practices in React development.",
-      image: "https://cdn.pixabay.com/photo/2015/09/04/23/28/wordpress-923188_1280.jpg"
+      image: "https://cdn.pixabay.com/photo/2017/04/19/12/45/adult-2242164_960_720.jpg"
     },
     {
       id: 5,
@@ -106,25 +106,25 @@ const HomePage = () => {
       id: 6,
       title: "Understanding React Basics",
       content: "A comprehensive guide to getting started with React. Discover the fundamental concepts and best practices in React development.",
-      image: "https://cdn.pixabay.com/photo/2015/09/04/23/28/wordpress-923188_1280.jpg"
+      image: "https://cdn.pixabay.com/photo/2020/03/06/08/00/laptop-4906312_1280.jpg"
     },
     {
       id: 7,
       title: "Understanding React Basics",
       content: "A comprehensive guide to getting started with React. Discover the fundamental concepts and best practices in React development.",
-      image: "https://cdn.pixabay.com/photo/2015/09/04/23/28/wordpress-923188_1280.jpg"
+      image: "https://cdn.pixabay.com/photo/2014/12/27/15/40/office-581131_1280.jpg"
     },
     {
       id: 8,
       title: "Understanding React Basics",
       content: "A comprehensive guide to getting started with React. Discover the fundamental concepts and best practices in React development.",
-      image: "https://cdn.pixabay.com/photo/2015/09/04/23/28/wordpress-923188_1280.jpg"
+      image: "https://cdn.pixabay.com/photo/2019/10/23/14/07/hand-4571730_960_720.jpg"
     },
     {
       id: 9,
       title: "Understanding React Basics",
       content: "A comprehensive guide to getting started with React. Discover the fundamental concepts and best practices in React development.",
-      image: "https://cdn.pixabay.com/photo/2015/09/04/23/28/wordpress-923188_1280.jpg"
+      image: "https://cdn.pixabay.com/photo/2018/06/13/09/32/technology-3472295_960_720.jpg"
     },
 
   ];

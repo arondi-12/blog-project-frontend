@@ -12,12 +12,13 @@
   }
   
   .dashboard-header {
-    padding: 2rem;
-    background-color: #4a7ae2;
+    padding: 3rem;
+    background-color: #336eef;
     border-bottom: 1px solid #eee;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100vw;
   }
   
   .dashboard-header h1 {
