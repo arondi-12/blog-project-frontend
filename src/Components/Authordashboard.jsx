@@ -15,6 +15,7 @@ const BlogForm = (onSubmit, initialData = null, onCancel) => {
       setBlogData({ title: '', content: '', image: '' });
     }
   };
+  
 
   return (
     <form className="blog-form" onSubmit={handleSubmit}>
@@ -61,7 +62,7 @@ const AuthorDashboard = () => {
       date: new Date().toISOString()
     },
     {
-      id: 1,
+      id: 2,
       title: 'The Bottlers ',
       content: 'It is now becoming a habit of bottling as the gunners are at it again.',
       image: 'https://cdn.pixabay.com/photo/2016/05/24/07/01/champions-1411861_1280.jpg',

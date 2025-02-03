@@ -50,7 +50,7 @@ const Dashboard = () => {
 
         <div 
           className="dashboard-card"
-          onClick={() => handleNavigation('/home')}
+          onClick={() => navigate('/home')}
         >
           <div className="card-icon">🏠</div>
           <h2>Home</h2>

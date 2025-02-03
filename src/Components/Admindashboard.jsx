@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../Styles/admindashboard.css';
 
 const CommentItem = (comment, onAuthorize, onReject) => {
@@ -115,10 +116,15 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="admin-dashboard">
-      <header className="dashboard-header">
-        <h1>ADMIN DASHBOARD</h1>
-      </header>
+      <div className="home-container">
+      <nav className="home-nav">
+        <div className="nav-left">
+        </div>
+        <div className="nav-right">
+          <Link to="/home" className="nav-link">Home</Link>
+          <Link to="/dashboard" className="nav-link signup">Dashboard</Link>
+        </div>
+      </nav>
 
       <div className="comments-section">
         <h2>Pending Comments</h2>
