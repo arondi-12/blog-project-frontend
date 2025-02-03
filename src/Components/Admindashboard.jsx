@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import '../Styles/admindashboard.css';
 
 const CommentItem = (comment, onAuthorize, onReject) => {
@@ -102,35 +101,25 @@ const AdminDashboard = () => {
   ]);
 
   const handleAuthorize = (commentId) => {
-    
-    setPendingComments(comments => 
-      comments.filter(comment => comment.id !== commentId)
+    setPendingComments(prevComments => 
+      prevComments.filter(comment => comment.id !== commentId)
     );
     alert('Comment authorized successfully!');
   };
 
   const handleReject = (commentId) => {
-  
-    setPendingComments(comments => 
-      comments.filter(comment => comment.id !== commentId)
+    setPendingComments(prevComments => 
+      prevComments.filter(comment => comment.id !== commentId)
     );
     alert('Comment rejected!');
   };
 
   return (
-    // <div className="admin-dashboard">
-    //   <header className="dashboard-header">
-    //     <h1>ADMIN DASHBOARD</h1>
-    //   </header>
-    <div className="home-container">
-    <nav className="home-nav">
-      <div className="nav-left">
+    <div className="admin-dashboard">
+      <header className="dashboard-header">
         <h1>ADMIN DASHBOARD</h1>
-      </div>
-      <div className="nav-right">
-        <Link to="/dashboard" className="nav-link signup">Dashboard</Link>
-      </div>
-    </nav>
+      </header>
+
       <div className="comments-section">
         <h2>Pending Comments</h2>
         {pendingComments.length === 0 ? (
@@ -140,7 +129,7 @@ const AdminDashboard = () => {
             {pendingComments.map(comment => (
               <CommentItem
                 key={comment.id}
-                comment={comment}
+                comment={comment} 
                 onAuthorize={handleAuthorize}
                 onReject={handleReject}
               />

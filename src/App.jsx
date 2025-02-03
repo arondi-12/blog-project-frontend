@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import LandingPage from './Components/LandingPage';
 import Signup from './Components/Signup';
 import Login from './Components/Login';
@@ -8,65 +8,37 @@ import AuthorDashboard from './Components/Authordashboard';
 import Dashboard from './Components/Dashboard';
 import './App.css';
 
+// Auth check functions
+const isAdmin = () => localStorage.getItem('user_role') === 'admin';
+const isAuthor = () => localStorage.getItem('user_role') === 'author';
 
-const isAdmin = () => {
-  return localStorage.getItem('userRole') === 'admin';
-};
-
-const isAuthor = () => {
-  return localStorage.getItem('userRole') === 'author';
-};
-
-
-const ProtectedAdminRoute = (children) => {
-  if (!isAdmin()) {
-    return <Navigate to="/login" replace />;
-  }
-  return children;
-};
-
-const ProtectedAuthorRoute = (children) => {
-  if (!isAuthor()) {
-    return <Navigate to="/login" replace />;
-  }
-  return children;
-};
+// Protected Route components
+const ProtectedAdminRoute = () => (isAdmin() ? <Outlet /> : <Navigate to="/login" replace />);
+const ProtectedAuthorRoute = () => (isAuthor() ? <Outlet /> : <Navigate to="/login" replace />);
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+    <Routes>
+      {/* Public Routes */}
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/home" element={<HomePage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+
+      {/* Protected Admin Route */}
+      <Route element={<ProtectedAdminRoute />}>
         <Route path="/admin" element={<AdminDashboard />} />
+      </Route>
+
+      {/* Protected Author Route */}
+      <Route element={<ProtectedAuthorRoute />}>
         <Route path="/author" element={<AuthorDashboard />} />
+      </Route>
 
-        
-        <Route 
-          path="/admin" 
-          element={
-            <ProtectedAdminRoute>
-              <AdminDashboard />
-            </ProtectedAdminRoute>
-          } 
-        />
-
-        
-        <Route 
-          path="/author" 
-          element={
-            <ProtectedAuthorRoute>
-              <AuthorDashboard />
-            </ProtectedAuthorRoute>
-          } 
-        />
-     
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Router>
+      {/* Catch-All Route */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 

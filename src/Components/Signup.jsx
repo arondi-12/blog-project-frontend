@@ -7,7 +7,7 @@ const Signup = () => {
     username: '',
     email: '',
     password: '',
-    role:''
+    role: ''
   });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -23,6 +23,8 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+
     try {
       setLoading(true);
       const response = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
@@ -99,11 +101,15 @@ const Signup = () => {
               <option value="user">USER</option>
             </select>
           </div>
+
+          
           <button type="submit" className="create-user-btn">
             {loading ? 'loading...' : 'Create Account'}
           </button>
         </form>
-        <p>Already have an account? <Link to="/login">log in</Link></p>
+        <p>
+          Already have an account? <Link to="/login">Log in</Link>
+        </p>
       </div>
     </div>
   );
