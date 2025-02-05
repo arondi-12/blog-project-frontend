@@ -10,12 +10,12 @@ const Dashboard = () => {
   let userRole = null;
   if (token) {
     const decodedToken = decodeToken(token);
-    userRole = decodedToken?.role; // Extract role from the token
+    userRole = decodedToken?.role; 
   }
 
   useEffect(() => {
     if (!token) {
-      navigate('/login'); // Redirect to login if not authenticated
+      navigate('/login'); 
     }
   }, [token, navigate]);
 

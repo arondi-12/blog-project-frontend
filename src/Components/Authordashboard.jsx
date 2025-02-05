@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import '../Styles/authordashboard.css'
+import { useEffect, useState } from 'react';
+import '../Styles/authordashboard.css';
 
 const BlogForm = (onSubmit, initialData = null, onCancel) => {
   const [blogData, setBlogData] = useState(initialData || {
@@ -15,7 +15,6 @@ const BlogForm = (onSubmit, initialData = null, onCancel) => {
       setBlogData({ title: '', content: '', image: '' });
     }
   };
-  
 
   return (
     <form className="blog-form" onSubmit={handleSubmit}>
@@ -53,59 +52,123 @@ const BlogForm = (onSubmit, initialData = null, onCancel) => {
 };
 
 const AuthorDashboard = () => {
-  const [blogs, setBlogs] = useState([
-    {
-      id: 1,
-      title: 'Sample Blog Post',
-      content: 'This is a sample blog post content.',
-      image: 'https://cdn.pixabay.com/photo/2020/02/11/19/56/laptop-4840790_1280.jpg',
-      date: new Date().toISOString()
-    },
-    {
-      id: 2,
-      title: 'The Bottlers ',
-      content: 'It is now becoming a habit of bottling as the gunners are at it again.',
-      image: 'https://cdn.pixabay.com/photo/2016/05/24/07/01/champions-1411861_1280.jpg',
-      date: new Date().toISOString()
-    }
-  ]);
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [showNewBlogForm, setShowNewBlogForm] = useState(false);
   const [editingBlog, setEditingBlog] = useState(null);
 
-  const handleNewBlog = (blogData) => {
-    const newBlog = {
-      ...blogData,
-      id: Date.now(),
-      date: new Date().toISOString()
-    };
-    setBlogs([newBlog, ...blogs]);
-    setShowNewBlogForm(false);
-    alert('Blog posted successfully!');
-  };
+  const fetchBlogs = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/all-blogs`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
 
-  const handleUpdateBlog = (blogData) => {
-    setBlogs(blogs.map(blog => 
-      blog.id === editingBlog.id ? { ...blog, ...blogData } : blog
-    ));
-    setEditingBlog(null);
-    alert('Blog updated successfully!');
-  };
-
-  const handleDeleteBlog = (blogId) => {
-    if (window.confirm('Are you sure you want to delete this blog?')) {
-      setBlogs(blogs.filter(blog => blog.id !== blogId));
-      alert('Blog deleted successfully!');
+      const data = await response.json();
+      console.log(blogs);
+      
+      if (response.ok) {
+        setBlogs(data);
+      } else {
+        console.error('Blog fetch unsuccessful:', data);
+      }
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
+      alert('An error occurred while fetching blogs.');
+    } finally {
+      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  const handleNewBlog = async (blogData) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/blog`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(blogData),
+      });
+
+      if (response.ok) {
+        const newBlog = await response.json();
+        setBlogs([newBlog, ...blogs]);
+        setShowNewBlogForm(false);
+        alert('Blog posted successfully!');
+      } else {
+        alert('Failed to post blog.');
+      }
+    } catch (error) {
+      console.error('Error posting blog:', error);
+      alert('An error occurred. Please try again.');
+    }
+  };
+
+  const handleUpdateBlog = async (blogData) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/blog/${editingBlog.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(blogData),
+      });
+
+      if (response.ok) {
+        setBlogs(blogs.map(blog => blog.id === editingBlog.id ? { ...blog, ...blogData } : blog));
+        setEditingBlog(null);
+        alert('Blog updated successfully!');
+      } else {
+        alert('Failed to update blog.');
+      }
+    } catch (error) {
+      console.error('Error updating blog:', error);
+      alert('An error occurred. Please try again.');
+    }
+  };
+
+  const handleDeleteBlog = async (blogId) => {
+    if (!window.confirm('Are you sure you want to delete this blog?')) return;
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/blog/${blogId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        setBlogs(blogs.filter(blog => blog.id !== blogId));
+        alert('Blog deleted successfully!');
+      } else {
+        alert('Failed to delete blog.');
+      }
+    } catch (error) {
+      console.error('Error deleting blog:', error);
+      alert('An error occurred. Please try again.');
+    }
+  };
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="author-dashboard">
       <header className="dashboard-header">
         <h1>AUTHOR DASHBOARD</h1>
-        <button 
-          className="new-blog-btn"
-          onClick={() => setShowNewBlogForm(true)}
-        >
+        <button className="new-blog-btn" onClick={() => setShowNewBlogForm(true)}>
           Create New Blog
         </button>
       </header>
@@ -114,17 +177,14 @@ const AuthorDashboard = () => {
         {showNewBlogForm && (
           <div className="form-section">
             <h2>Create New Blog</h2>
-            <BlogForm 
-              onSubmit={handleNewBlog}
-              onCancel={() => setShowNewBlogForm(false)}
-            />
+            <BlogForm onSubmit={handleNewBlog} onCancel={() => setShowNewBlogForm(false)} />
           </div>
         )}
 
         {editingBlog && (
           <div className="form-section">
             <h2>Edit Blog</h2>
-            <BlogForm 
+            <BlogForm
               initialData={editingBlog}
               onSubmit={handleUpdateBlog}
               onCancel={() => setEditingBlog(null)}
@@ -135,34 +195,17 @@ const AuthorDashboard = () => {
         <div className="blogs-section">
           <h2>Your Blogs</h2>
           <div className="blogs-list">
-            {blogs.map(blog => (
-              <div key={blog.id} className="blog-item">
-                {blog.image && (
-                  <img src={blog.image} alt={blog.title} className="blog-image" />
-                )}
-                <div className="blog-details">
+          {/* {Array.isArray(blogs) && blogs.length > 0 ? ( */}
+              {blogs.map(blog => (
+                <div key={blog.id} className="blog-item">
                   <h3>{blog.title}</h3>
                   <p>{blog.content}</p>
-                  <span className="blog-date">
-                    {new Date(blog.date).toLocaleDateString()}
-                  </span>
                 </div>
-                <div className="blog-actions">
-                  <button 
-                    className="edit-btn"
-                    onClick={() => setEditingBlog(blog)}
-                  >
-                    Edit
-                  </button>
-                  <button 
-                    className="delete-btn"
-                    onClick={() => handleDeleteBlog(blog.id)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))}
+              ))}
+            {/* ) : (
+              <p>No blogs found.</p>
+            )} */}
+
           </div>
         </div>
       </div>
