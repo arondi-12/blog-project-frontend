@@ -7,10 +7,10 @@ const LandingPage = () => {
       <nav className="navbar">
         <div className="logo">AD Blogs</div>
         <div className="nav-links">
-          <a href="/home">Home</a>
-          <a href="/dashboard">Dashboard</a>
-          <a href="/login">Log in</a>
-          <a href="/signup" className="signup-btn">Sign Up</a>
+          <Link href="/home">Home</Link>
+          <Link href="/dashboard">Dashboard</Link>
+          <Link to="/login">Log in</Link>
+          <Link href="/signup" className="signup-btn">Sign Up</Link>
         </div>
       </nav>
 
