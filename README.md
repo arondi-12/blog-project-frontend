@@ -1,21 +1,32 @@
 AD Blogs - Frontend
 Overview
-AD Blogs App is an App that aloows diferent users to read blogs published by authors onto the site for educational or leisure purposes.
+AD Blogs App is an App that aloows diferent users to read blogs 
+published by authors onto the site for educational or leisure purposes.
 
 Current Features
 User authentication (Login/Signup) for users, authors and an admin
-User homepage where there are blogs that can be read, liked and one can add their comments
+User homepage where there are blogs that can be read,
+ liked and one can add their comments
 Responsive design for various screen sizes
+
+
 Go Live Link: https://arondiblog.netlify.app
+
+
 Upcoming Features
-Advanced search and filtering system for users to filter their search
+Advanced search and filtering system for users 
+to filter their search
 Log out feature
 Nav bar on all pages for easier navigation
 Author posting Functionality
-Admin ability to filter the comments that appear on the main screen
+Admin ability to filter the comments that appear
+ on the main screen
 Email notification system
 Enhanced profile customization options
-Improvements on the UI to be more appealing and user friendly
+Improvements on the UI to be more appealing 
+and user friendly
+
+
 Technologies Used
 React.js
 CSS for styling
@@ -33,6 +44,8 @@ Start the development server
 npm run dev
 Live Demo
 
+
+
 Contributing
 Fork the repository
 Create your feature branch (git checkout -b feature/YourFeature)
@@ -41,6 +54,7 @@ Push to the branch (git push origin feature/YourFeature)
 Create a new Pull Request
 Contact
 David Ariwi - davieariwi@gmail.com
+
 
 License
 This project is licensed under the MIT License - see the LICENSE.md file for details
