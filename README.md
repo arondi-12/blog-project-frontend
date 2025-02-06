@@ -3,10 +3,12 @@ Overview
 AD Blogs App is an App that aloows diferent users to read blogs 
 published by authors onto the site for educational or leisure purposes.
 
-Current Features
+Current Features:
+
 User authentication (Login/Signup) for users, authors and an admin
+Restrictions to Dashboards according to user role
 User homepage where there are blogs that can be read,
- liked and one can add their comments
+liked and one can add their comments
 Responsive design for various screen sizes
 
 
@@ -21,7 +23,7 @@ Log out feature
 Nav bar on all pages for easier navigation
 Author posting Functionality
 Admin ability to filter the comments that appear
- on the main screen
+on the main screen
 Email notification system
 Enhanced profile customization options
 Improvements on the UI to be more appealing 
