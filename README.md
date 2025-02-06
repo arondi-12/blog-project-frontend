@@ -13,9 +13,10 @@ Responsive design for various screen sizes
 Go Live Link: https://arondiblog.netlify.app
 
 
-Upcoming Features
-Advanced search and filtering system for users 
-to filter their search
+Upcoming Features:
+
+Advanced search and filtering system 
+for users to filter their search
 Log out feature
 Nav bar on all pages for easier navigation
 Author posting Functionality
@@ -36,6 +37,7 @@ Node.js (v14 or higher)
 npm package manager
 Installation
 Clone the repository
+
 git clone https://github.com/arondi-12/blog-project-frontend
 cd blog-project-frontend
 Install dependencies
