@@ -202,9 +202,9 @@ const AuthorDashboard = () => {
                   <p>{blog.content}</p>
                 </div>
               ))}
-            {/* ) : (
+             : (
               <p>No blogs found.</p>
-            )} */}
+            )
 
           </div>
         </div>
